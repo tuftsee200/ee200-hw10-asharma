@@ -1,31 +1,49 @@
 #include "array.h"
 #include <cstdio>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <iostream>
+#include <cstring>
 
-int main(int argc, char* argv[])
-{
-  // Here's some quick test code to get you started.  You'll need much more
-  // thorough testing, of course.
+#include <exception>
 
-  Array arr;
-  arr.initialize(10, 5);
+int main(int argc, char* argv[]) {
+    
+ Array<int> arr;
+    arr.append(3);
+    arr.append(4);
+    arr.append(5);
 
-  Array rtoo;
-  rtoo.initialize(0, 0);
-  rtoo = arr;
+    // Test the copy constructor
+    Array<int> copy(arr);
+    copy[1] = 6;
 
-  for(int i = 0; i < arr.size(); i++){
-    arr[i] = i * 2;
-  }
+    // Test the = operator
+    Array<int> copy2;
+    copy2 = arr;
+    copy2[1] = 7;
 
+    // Test + operator
+    Array<int> sum = arr + copy + copy2;
 
-  for(int i = 0; i < arr.size(); i++){
-    printf(" arr[%d] = %d\n", i, arr[i]);
-  }
+    // Test the [] operator
+    for (int i = 0; i < sum.getSize(); i++)
+    {
+        std::cout << sum[i] << ' ';
+    }
 
-  for(int i = 0; i < rtoo.size(); i++){
-    printf("rtoo[%d] = %d\n", i, rtoo[i]);
-  }
+    std::cout << std::endl;
 
-  return(0);
+    // Test out of bounds error
+    try
+    {
+        std::cout << sum[sum.getSize()] << std::endl;
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+    return 0;
 }
 
