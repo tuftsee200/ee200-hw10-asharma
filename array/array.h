@@ -1,16 +1,44 @@
 #ifndef ARRAY_H
 #define ARRAY_H
+#include <iostream>
 
-class Array{
-  // You'll need to fill in the function declarations here, since writing them
-  // correctly is half the challenge of some of these functions.  Be careful to
-  // give them the same names as specified in the README, and pay special
-  // attention to things which should be const, references, or both.
+class Array {
+public:
+    // Constructors
+    Array();
+    Array(int length, int value);
+    Array(int length, int* values);
+    Array(const Array& other); // Copy constructor
+    Array(int length);
+    // Destructor
+    ~Array();
 
-  // Note that if your function declarations are incorrect, the autograder will
-  // fail to compile.  We'll make sure the autograder is at least able to test
-  // compiling your code before the submission deadline.
+    // Public member functions
+    int getSize() const;
+    void append(int x);
+    void append(const Array& other);
+    Array operator+(const Array& other);
+    Array& operator=(const Array& other);
+    int& operator[](int index);
+    const int& operator[](int index) const;
+    friend std::ostream& operator<<(std::ostream& os, const Array& arr);
+
+private:
+    int* values;
+    int size;
+    int capacity;
+    void allocate(int length){
+	    values = new int[length];
+	    capacity = length;
+    }
+    void copy(const Array& other){
+	    allocate(other.size);
+	for (int i = 0; i<other.size; i++){
+values[i] = other.values[i];
+}
+size = other.size;
+}
+	
 };
 
-
-#endif
+#endif	
