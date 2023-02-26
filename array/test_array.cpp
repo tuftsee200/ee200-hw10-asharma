@@ -1,31 +1,98 @@
 #include "array.h"
 #include <cstdio>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <iostream>
+#include <cstring>
 
+#include <exception>
 int main(int argc, char* argv[])
 {
   // Here's some quick test code to get you started.  You'll need much more
   // thorough testing, of course.
+// Test the default constructor
+    Array<int> arr;
+    arr.append(3);
+    arr.append(4);
+    arr.append(5);
 
-  Array arr;
-  arr.initialize(10, 5);
+    // Test the copy constructor
+    Array<int> copy(arr);
+    copy[1] = 6;
 
-  Array rtoo;
-  rtoo.initialize(0, 0);
-  rtoo = arr;
+    // Test the = operator
+    Array<int> copy2;
+    copy2 = arr;
+    copy2[1] = 7;
 
-  for(int i = 0; i < arr.size(); i++){
-    arr[i] = i * 2;
-  }
+    // Test + operator
+    Array<int> sum = arr + copy + copy2;
+
+    // Test the [] operator
+    for (int i = 0; i < sum.getSize(); i++)
+    {
+        std::cout << sum[i] << ' ';
+    }
+
+    std::cout << std::endl;
+
+    // Test out of bounds error
+    try
+    {
+        std::cout << sum[sum.getSize()] << std::endl;
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+
+    // Test the << operator
+    // std::cout << sum << std::endl;
+
+    Array<int> arrr(3, 0);
+    try {
+        std::cout << "The fourth number is: " << arrr[3] << std::endl;
+    }
+    catch (const std::exception& e){
+        std::cout << "There was an error: " << e.what() << std::endl;
+    }
+
+    Array<int> arr2 (10, 5);
+    Array<int> rtoo (0, 0);
+    rtoo = arr2;
+
+    for(int i = 0; i < arr2.getSize(); i++){
+        arr2[i] = i * 2;
+    }
+    for(int i = 0; i < arr2.getSize(); i++){
+        printf(" arr[%d] = %d\n", i, arr2[i]);
+    }
+    for(int i = 0; i < rtoo.getSize(); i++){
+        printf("rtoo[%d] = %d\n", i, rtoo[i]);
+    }
+
+    return 0;
+ // Array arr;
+  //arr.initialize(10, 5);
+
+ // Array rtoo;
+ // rtoo.initialize(0, 0);
+ // rtoo = arr;
+
+  //for(int i = 0; i < arr.size(); i++){
+    //arr[i] = i * 2;
+  //}
 
 
-  for(int i = 0; i < arr.size(); i++){
-    printf(" arr[%d] = %d\n", i, arr[i]);
-  }
+ // for(int i = 0; i < arr.size(); i++){
+    //printf(" arr[%d] = %d\n", i, arr[i]);
+  //}
 
-  for(int i = 0; i < rtoo.size(); i++){
-    printf("rtoo[%d] = %d\n", i, rtoo[i]);
-  }
+ // for(int i = 0; i < rtoo.size(); i++){
+    //printf("rtoo[%d] = %d\n", i, rtoo[i]);
+  //}
 
-  return(0);
+ // return(0);
 }
 
