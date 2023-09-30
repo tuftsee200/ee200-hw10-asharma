@@ -1,18 +1,20 @@
 #include "array.h"
+#include <cstdlib>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <cstdlib>
 
-void Array::initialize(int size, int val)
+
+    // Function to initialize the Array with storage for 'size' elements, all initialized to 'val'
+    void Array::initialize(int storage, int val)
     {
-      this->size = size;
+      this->storage = storage;
 
       // Allocate memory for the data array
-      data = (int*) malloc(size * sizeof(int));
+      data = (int*) malloc(storage * sizeof(int));
 
       // Initialize the elements of the array to 'val'
-      for (int i = 0; i < size; i++) {
+      for (int i = 0; i < storage; i++) {
         data[i] = val;
       }
     }
@@ -24,25 +26,25 @@ void Array::initialize(int size, int val)
     }
 
     // Function to return the current size of the Array
-    int Array::Size()
+    int Array::size()
     {
-      return size;
+      return storage;
     }
 
     // Function to add the element 'x' to the end of the array
     void Array::append(int x)
     {
       // Allocate memory for the new element
-      int* newData = (int*) malloc((size + 1) * sizeof(int));
+      int* newData = (int*) malloc((storage + 1) * sizeof(int));
 
       // Copy the old elements to the new array
-      memcpy(newData, data, size * sizeof(int));
+      memcpy(newData, data, storage * sizeof(int));
 
       // Add the new element to the end of the array
-      newData[size] = x;
+      newData[storage] = x;
 
       // Update the size of the array
-      size++;
+      storage++;
 
       // Free the old memory and set the new array as the data
       free(data);
@@ -53,16 +55,16 @@ void Array::initialize(int size, int val)
     void Array::append(Array y)
     {
       // Allocate memory for the new elements
-      int* newData = (int*) malloc((size + y.Size()) * sizeof(int));
+      int* newData = (int*) malloc((storage + y.size()) * sizeof(int));
 
       // Copy the old elements to the new array
-      memcpy(newData, data, size * sizeof(int));
+      memcpy(newData, data, storage * sizeof(int));
 
       // Copy the elements from 'y' to the end of the new array
-      memcpy(newData + size, y.data, y.Size() * sizeof(int));
+      memcpy(newData + storage, y.data, y.size() * sizeof(int));
 
       // Update the size of the array
-      size += y.Size();
+      storage += y.size();
 
       // Free the old memory and set the new array as the data
       free(data);
@@ -70,7 +72,7 @@ void Array::initialize(int size, int val)
     }
 
     // Overload the assignment operator to make a deep copy of the Array
-    Array& Array::operator=(Array& y) // was const
+   Array& Array::operator=(Array& y) // was const
     {
       // Check for self-assignment
       if (this == &y) {
@@ -81,21 +83,21 @@ void Array::initialize(int size, int val)
       free(data);
 
       // Allocate memory for the new elements
-      size = y.Size();
-      data = (int*) malloc(size * sizeof(int));
+      storage = y.size();
+      data = (int*) malloc(storage * sizeof(int));
 
       // Copy the elements from 'y' to the new array
-      memcpy(data, y.data, size * sizeof(int));
+      memcpy(data, y.data, storage * sizeof(int));
 
       // Return the new Array
       return *this;
     }
 
     // Overload the bracket operator for reading and writing elements of the Array
-    int& Array::operator[](int index)
+   int& Array::operator[](int index)
     {
       // Check for invalid index
-      if (index < 0 || index >= size) {
+      if (index < 0 || index >= storage) {
           printf("error\n");
           exit(0);
       }
@@ -103,14 +105,5 @@ void Array::initialize(int size, int val)
       // Return the element at the specified index
       return data[index];
     }
-
-
-
-
-
-
-
-   
-
-//not much to say here.  Good luck!
+;
 
