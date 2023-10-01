@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
     Array e = c + d;
 
     // Print the size of an array
-    cout << "Size of array e: " << e.getSize() << endl;
+    cout << "Size of array e: " << e.size() << endl;
 
     // Print the content of an array using the << operator
     cout << "Array e: " << e << endl;
