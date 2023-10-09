@@ -1,4 +1,5 @@
 #include "array.h"
+
 #include <cstdio>
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,6 +9,8 @@
 
 #include <exception>
 
+
+using namespace std;
 int main(int argc, char* argv[]) {
     
  Array<int> arr;
@@ -28,7 +31,7 @@ int main(int argc, char* argv[]) {
     Array<int> sum = arr + copy + copy2;
 
     // Test the [] operator
-    for (int i = 0; i < sum.getSize(); i++)
+    for (int i = 0; i < sum.size(); i++)
     {
         std::cout << sum[i] << ' ';
     }
@@ -38,7 +41,7 @@ int main(int argc, char* argv[]) {
     // Test out of bounds error
     try
     {
-        std::cout << sum[sum.getSize()] << std::endl;
+        std::cout << sum[sum.size()] << std::endl;
     }
     catch (const std::exception& e)
     {

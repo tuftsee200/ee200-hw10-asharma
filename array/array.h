@@ -6,8 +6,8 @@
 #include <iostream>
 #include <cstring>
 
-#include <exception>
 
+#include <exception>
 class OutOfBoundsException : public std::exception
 {
     public:
@@ -23,31 +23,31 @@ class Array {
 public:
     // Constructors and Destructor
     // Default constructor: creates an empty array with capacity 0
-    Array() : size(0), data(NULL) {}
+    Array() : size1(0), data(NULL) {}
 
-    Array(int length) : size(length), data(new T[length]) {
+    Array(int length) : size1(length), data(new T[length]) {
         for (int i = 0; i < length; i++) {
             data[i] = 0;
         }
     }
 
-    // Constructor with length and initial value: creates an array of the given length, filled with the given initial value
-    Array(int length, T value) : size(length), data(new T[length]) {
-        for (int i = 0; i < length; i++) {
-            data[i] = value;
+   
+    Array(int length, T value) : size1(length), data(new T[length]) {
+       for (int i = 0; i < length; i++) {
+          data[i] = value;
         }
     }
 
     // Constructor with length and array: creates an array of the given length, filled with the values from the given array
-    Array(int length, T* values) : size(length), data(new T[length]) {
+    Array(int length, T* values) : size1(length), data(new T[length]) {
         for (int i = 0; i < length; i++) {
             data[i] = values[i];
         }
     }
 
     // Copy constructor: creates a deep copy of the given array
-    Array(const Array& other) : size(other.size), data(new T[size]) {
-        for (int i = 0; i < size; i++) {
+    Array(const Array& other) : size1(other.size1), data(new T[size1]) {
+        for (int i = 0; i < size1; i++) {
             data[i] = other.data[i];
         }
     }
@@ -65,23 +65,39 @@ public:
     Array<T> operator+(const Array& other);
     T& operator[](int index);
     const T& operator[](int index) const;
+    
+    // Declare operator<< and operator>> in the class
+friend std::ostream& operator<<(std::ostream& out, const Array<T>& array) {
+    for (int i = 0; i < array.size1(); i++) {
+        out << array[i] << ' ';
+    }
+    return out;
+}
+
+friend std::istream& operator>>(std::istream& in, Array<T>& array) {
+    for (int i = 0; i < array.size1(); i++) {
+        in >> array[i];
+    }
+    return in;
+}
+
+
 
     //template<class T>
-    friend std::ostream& operator<<(std::ostream& out, const Array<T>& array);
+    //friend std::ostream& operator<<(std::ostream& out, const Array<T>& array);
 
-    //template<class T>
-    friend std::istream& operator>>(std::istream& in, Array<T>& array);
+   // template<class T>
+    //friend std::istream& operator>>(std::istream& in, Array<T>& array);
 
     // Array Operations
     void append(T x);
     void append(const Array& other);
-    int getSize() const;
+    int size() const;
 
 private:
+    //T* data;
+    int size1;
     T* data;
-    int size;
     int capacity;
 };
-
-
 #endif
