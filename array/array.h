@@ -7,6 +7,7 @@
 #include <cstring>
 
 #include <exception>
+
 class OutOfBoundsException : public std::exception
 {
     public:
@@ -22,7 +23,7 @@ class Array {
 public:
     // Constructors and Destructor
     // Default constructor: creates an empty array with capacity 0
-    Array() : data(NULL), size(0) {}
+    Array() : size(0), data(NULL) {}
 
     Array(int length) : size(length), data(new T[length]) {
         for (int i = 0; i < length; i++) {
@@ -77,18 +78,8 @@ public:
     int getSize() const;
 
 private:
-    T* data;
     int size;
+    T* data;
     int capacity;
-  // You'll need to fill in the function declarations here, since writing them
-  // correctly is half the challenge of some of these functions.  Be careful to
-  // give them the same names as specified in the README, and pay special
-  // attention to things which should be const, references, or both.
-
-  // Note that if your function declarations are incorrect, the autograder will
-  // fail to compile.  We'll make sure the autograder is at least able to test
-  // compiling your code before the submission deadline.
 };
-
-
-#endif
+# endif

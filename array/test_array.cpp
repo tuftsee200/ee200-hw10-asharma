@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
     // Test out of bounds error
     try
     {
-        std::cout << sum[sum.getSize()] << std::endl;
+        std::cout << sum[sum.getSize() - 1] << std::endl;
     }
     catch (const std::exception& e)
     {
