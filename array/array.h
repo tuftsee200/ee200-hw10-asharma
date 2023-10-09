@@ -76,9 +76,9 @@ public:
     void append(T x);
     void append(const Array& other);
     int getSize() const;
-
-private:
     int size;
+private:
+    //int size;
     T* data;
     int capacity;
 };
