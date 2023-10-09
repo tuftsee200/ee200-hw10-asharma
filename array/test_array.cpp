@@ -16,7 +16,13 @@ int main(int argc, char* argv[])
     arr.append(3);
     arr.append(4);
     arr.append(5);
-
+    // Test getSize
+int size1 = arr.size();
+if (size1 == 3) {
+    std::cout << "getSize test passed. Size is correct: " << size1 << std::endl;
+} else {
+    std::cout << "getSize test failed. Expected size: 3, Actual size: " << size1 << std::endl;
+}
     // Test the copy constructor
     Array<int> copy(arr);
     copy[1] = 6;
@@ -30,7 +36,7 @@ int main(int argc, char* argv[])
     Array<int> sum = arr + copy + copy2;
 
     // Test the [] operator
-    for (int i = 0; i < sum.getSize(); i++)
+    for (int i = 0; i < sum.size(); i++)
     {
         std::cout << sum[i] << ' ';
     }
@@ -40,7 +46,7 @@ int main(int argc, char* argv[])
     // Test out of bounds error
     try
     {
-        std::cout << sum[sum.getSize() - 1] << std::endl;
+        std::cout << sum[sum.size() - 1] << std::endl;
     }
     catch (const std::exception& e)
     {
@@ -58,17 +64,28 @@ int main(int argc, char* argv[])
         std::cout << "There was an error: " << e.what() << std::endl;
     }
 
+    // Test getSize()
+    int expectedSize = 3; // Set the expected size here
+    int actualSize = sum.size();
+
+    if (actualSize == expectedSize) {
+        std::cout << "getSize() test passed. Expected size: " << expectedSize << ", Actual size: " << actualSize << std::endl;
+    } else {
+        std::cout << "getSize() test failed. Expected size: " << expectedSize << ", Actual size: " << actualSize << std::endl;
+    }
+
+
     Array<int> arr2 (10, 5);
     Array<int> rtoo (0, 0);
     rtoo = arr2;
 
-    for(int i = 0; i < arr2.getSize(); i++){
+    for(int i = 0; i < arr2.size(); i++){
         arr2[i] = i * 2;
     }
-    for(int i = 0; i < arr2.getSize(); i++){
+    for(int i = 0; i < arr2.size(); i++){
         printf(" arr[%d] = %d\n", i, arr2[i]);
     }
-    for(int i = 0; i < rtoo.getSize(); i++){
+    for(int i = 0; i < rtoo.size(); i++){
         printf("rtoo[%d] = %d\n", i, rtoo[i]);
     }
 
