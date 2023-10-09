@@ -22,7 +22,7 @@ class Array {
 public:
     // Constructors and Destructor
     // Default constructor: creates an empty array with capacity 0
-    Array() : size(0), data(NULL) {}
+    Array() : data(NULL), size(0) {}
 
     Array(int length) : size(length), data(new T[length]) {
         for (int i = 0; i < length; i++) {
