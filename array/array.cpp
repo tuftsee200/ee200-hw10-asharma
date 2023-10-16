@@ -104,6 +104,8 @@ const T& Array<T>::operator[](int index) const {
     return data[index];
 }
 template class Array<int>;
+
+
 /*template <typename T>
 std::ostream& operator<<(std::ostream& out, const Array<T>& array) {
     out << "[";

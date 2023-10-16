@@ -14,13 +14,13 @@ using namespace std;
 int main(int argc, char* argv[]) {
     
  Array<int> arr;
-    arr.append(3);
+    arr.append(2);
     arr.append(4);
     arr.append(5);
 
     // Test the copy constructor
     Array<int> copy(arr);
-    copy[1] = 6;
+    copy[1] = 9;
 
     // Test the = operator
     Array<int> copy2;
