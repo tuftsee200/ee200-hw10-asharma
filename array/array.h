@@ -27,10 +27,10 @@ public:
     // Default constructor: creates an empty array with capacity 0
     Array() : size1(0), data(nullptr) {}
 
-    Array(int length) : size1(length), data(new T[length]) {
-        for (int i = 0; i < length; i++) {
-            data[i] = 0;
-        }
+        Array(int length) : size1(length), data(new T[length]) {
+        //for (int i = 0; i < length; i++) {
+          //  data[i] = 0;
+        //}
     }
 
     Array(int length, T value) : size1(length), data(new T[length]) {
@@ -58,6 +58,8 @@ public:
         }
     }
 
+
+ 
     Array<T>& operator=(const Array& other);
     Array<T> operator+(const Array& other);
     T& operator[](int index);
@@ -77,19 +79,6 @@ public:
         return in;
     }
 
-    // Constructors for different data types
-    template <typename U>
-    Array(int length, const U& value);
-
-    // ...
-
-    // Type conversion operator for assignment between arrays of different data types
-    template <typename U>
-    operator Array<U>() const;
-
-    // Assignment operator for arrays of different data types
-    template <typename U>
-    Array<T>& operator=(const Array<U>& other);
 
     void append(T x);
     void append(const Array& other);
@@ -172,33 +161,6 @@ template <typename T>
 int Array<T>::size() const {
     return size1;
 }
-
-template <typename T>
-template <typename U>
-Array<T>::operator Array<U>() const {
-    static_assert(std::is_convertible<T, U>::value, "Type conversion not allowed");
-    Array<U> result(size1);
-    for (int i = 0; i < size1; i++) {
-        result[i] = static_cast<U>(data[i]);
-    }
-    return result;
-}
-
-template <typename T>
-template <typename U>
-Array<T>& Array<T>::operator=(const Array<U>& other) {
-    static_assert(std::is_assignable<T, U>::value, "Assignment between types not allowed");
-    if (this != &other) {
-        delete[] data;
-        size1 = other.size1;
-        data = new T[size1];
-        for (int i = 0; i < size1; i++) {
-            data[i] = static_cast<T>(other[i]);
-        }
-    }
-    return *this;
-}
-
 
 #endif
 
